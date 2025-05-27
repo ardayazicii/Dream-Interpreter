@@ -1,0 +1,17 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dream Analyzer</title>
+</head>
+<body>
+    <h1>Analyze Your Dream</h1>
+    <form method="POST">
+        {% csrf_token %}
+        <input type="text" name="title" placeholder="Dream Title" required><br><br>
+        <textarea name="description" placeholder="Describe your dream" rows="10" cols="30" required></textarea><br><br>
+        <button type="submit">Analyze Dream</button>
+    </form>
+</body>
+</html>

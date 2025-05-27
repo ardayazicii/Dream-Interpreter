@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>Rüya Yorumla</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(to right, #e0f7fa, #fffde7);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px;
+            margin: 0;
+        }
+
+        h1 {
+            color: #006064;
+            margin-bottom: 20px;
+        }
+
+        textarea {
+            width: 100%;
+            max-width: 500px;
+            height: 150px;
+            padding: 10px;
+            font-size: 16px;
+            border: 2px solid #b2ebf2;
+            border-radius: 8px;
+            resize: vertical;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        button {
+            margin-top: 15px;
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #00796b;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #004d40;
+        }
+
+        h2 {
+            margin-top: 40px;
+            color: #004d40;
+        }
+
+        pre {
+            background-color: #f1f8e9;
+            padding: 15px;
+            width: 100%;
+            max-width: 500px;
+            border-radius: 8px;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+    </style>
+</head>
+<body>
+    <h1>Rüyanı Yaz</h1>
+    <textarea id="dreamText" placeholder="Rüyanızı buraya yazın..."></textarea><br>
+    <button onclick="generate()">Yorumla</button>
+
+    <h2>Yorum:</h2>
+    <pre id="result"></pre>
+
+    <script>
+        async function generate() {
+            const prompt = document.getElementById('dreamText').value;
+            const response = await fetch('/generate/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ prompt })
+            });
+
+            const data = await response.json();
+            document.getElementById('result').innerText = data.response || data.error;
+        }
+    </script>
+</body>
+</html>
+
+
+
